@@ -1,0 +1,4 @@
+<string> ::= <letter>|<letter><string>
+<letter> ::= <vowel>|<consonant>
+<vowel> ::= a|o|u|e|i
+<consonant> ::= q|w|r|t|y|p|s|d|f|g|h|j|k|l|z|x|c|v|b|n|m
