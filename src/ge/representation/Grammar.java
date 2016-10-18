@@ -5,21 +5,14 @@ import java.util.List;
 
 public class Grammar {
 	
-	private String startSymbol;
-	
 	protected List<Rule> rules;
 	
-	public Grammar(String startSymbol, List<Rule> rules) {
-		this.setStartSymbol(startSymbol);
-		this.rules = rules;
-	}
-
-	public Grammar(String startSymbol) {
-		this(startSymbol, new ArrayList<Rule>());
-	}
-
 	public Grammar() {
-		this("<string>");
+		this(new ArrayList<Rule>());
+	}
+
+	public Grammar(List<Rule> rules) {
+		this.rules = rules;
 	}
 
 	public void appendRule(Rule rule) {
@@ -27,12 +20,8 @@ public class Grammar {
 	}
 	
 	public String getStartSymbol() {
-		return startSymbol;
-	}
-
-	public void setStartSymbol(String startSymbol) {
-		this.startSymbol = startSymbol;
-	}
+		return this.rules.get(0).getNonTerminal();
+	}	
 	
 	public Rule getRule(String nonTerminal) {
 		for (Rule rule : this.rules) {

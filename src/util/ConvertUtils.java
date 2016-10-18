@@ -2,7 +2,7 @@ package util;
 
 import jmetal.core.Solution;
 import jmetal.encodings.variable.Binary;
-import jmetal.encodings.variable.Permutation;
+import jmetal.encodings.variable.Int;
 
 public class ConvertUtils {
 	/**
@@ -79,9 +79,16 @@ public class ConvertUtils {
 	}
 	
 	public static int[] fromIntegerSolutionToIntArray(Solution solution) {
-		Permutation variable = ((Permutation) solution.getDecisionVariables()[0]);
-
-		return variable.vector_;
+		
+		int size = solution.getDecisionVariables().length;
+		
+		int[] array = new int[size];
+		
+		for (int i = 0; i < size; i++) {
+			array[i] = (int) ((Int)solution.getDecisionVariables()[i]).getValue();
+		}
+	
+		return array;
 	}
 	
 	public static String fromSolutionToString(Solution solution) {

@@ -1,11 +1,15 @@
 package util;
 
 import java.util.HashMap;
+
 import jmetal.core.Operator;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.MutationFactory;
 import jmetal.operators.selection.SelectionFactory;
 import jmetal.util.JMException;
+import operator.crossover.SinglePointVariableLengthCrossover;
+import operator.mutation.IncreaseVariableLengthMutation;
+import operator.mutation.SwapVariableLengthMutation;
 
 @SuppressWarnings({"rawtypes","unchecked"})
 public class OperatorUtils {
@@ -15,6 +19,10 @@ public class OperatorUtils {
 		
 		parameters.put("probability", probability) ;
 		
+		if (name.equalsIgnoreCase("SinglePointVariableLengthCrossover")) {
+			return new SinglePointVariableLengthCrossover(parameters);
+		}
+		
 		return CrossoverFactory.getCrossoverOperator(name, parameters);
 	}
 	
@@ -22,6 +30,12 @@ public class OperatorUtils {
 		HashMap parameters = new HashMap();
 		
 		parameters.put("probability", probability) ;
+		
+		if (name.equalsIgnoreCase("SwapVariableLengthMutation")) {
+			return new SwapVariableLengthMutation(parameters);
+		}else if (name.equalsIgnoreCase("IncreaseVariableLengthMutation")) {
+			return new IncreaseVariableLengthMutation(parameters);
+		}		
 		
 		return MutationFactory.getMutationOperator(name, parameters);
 	}

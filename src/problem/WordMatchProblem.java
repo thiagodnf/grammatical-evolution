@@ -4,6 +4,7 @@ import ge.mapper.IntegerToDerivationMapper;
 import ge.representation.Grammar;
 import jmetal.core.Problem;
 import jmetal.core.Solution;
+import jmetal.encodings.solutionType.IntSolutionType;
 import jmetal.encodings.solutionType.PermutationSolutionType;
 import jmetal.util.JMException;
 import reader.GrammarReader;
@@ -24,14 +25,21 @@ public class WordMatchProblem extends Problem{
 
 	public WordMatchProblem(String grammar, String expectedName, int maxInteger) {
 		// JMetal
-		numberOfVariables_ = 1;
+		numberOfVariables_ = maxInteger;
 		numberOfObjectives_ = 1;
 		numberOfConstraints_ = 0;
+		
 		problemName_ = this.getClass().getCanonicalName();
-		solutionType_ = new PermutationSolutionType(this);
-		length_ = new int[numberOfVariables_];
-		length_[0] = maxInteger;
+		solutionType_ = new IntSolutionType(this);
+		
+		lowerLimit_ = new double[numberOfVariables_];
+		upperLimit_ = new double[numberOfVariables_];
 
+		for (int var = 0; var < numberOfVariables_; var++) {
+			lowerLimit_[var] = 1;
+			upperLimit_[var] = 10;
+		}
+		
 		// Problem
 		this.expectedName = expectedName;
 		this.grammar = new GrammarReader(grammar).getGrammar();

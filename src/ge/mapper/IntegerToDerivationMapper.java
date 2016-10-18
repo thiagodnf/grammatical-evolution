@@ -32,7 +32,7 @@ public class IntegerToDerivationMapper extends Mapper {
 				position++;
 			}
 			
-			if(rule.length() > 500) {
+			if(rule.length() > 200) {
 				break;
 			}
 			

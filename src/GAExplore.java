@@ -11,18 +11,18 @@ public class GAExplore {
 	public static void main(String[] args) throws JMException, ClassNotFoundException {
 		System.out.println("Running...");
 
-		WordMatchProblem p = new WordMatchProblem("grammar/letter.bnf", "thiagodnf", 250);
+		WordMatchProblem p = new WordMatchProblem("grammar/letter.bnf", "thiagodnf", 10);
 
 		// Generational GA
 		Algorithm algorithm = new gGA(p);
 
 		/* Algorithm parameters */
 		algorithm.setInputParameter("populationSize", 100);
-		algorithm.setInputParameter("maxEvaluations", 250000);
+		algorithm.setInputParameter("maxEvaluations", 500000);
 
 		/* Operators */
-		Operator crossover = OperatorUtils.getCrossover("TwoPointsCrossover", 0.9);
-		Operator mutation = OperatorUtils.getMutation("SwapMutation", 0.05);
+		Operator crossover = OperatorUtils.getCrossover("SinglePointVariableLengthCrossover", 0.9);
+		Operator mutation = OperatorUtils.getMutation("SwapVariableLengthMutation", 0.05);
 		Operator selection = OperatorUtils.getSelection("BinaryTournament");
 
 		/* Add the operators to the algorithm */
